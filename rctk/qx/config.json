@@ -1,0 +1,104 @@
+{
+  "name"    : "rctk",
+
+  "include" :
+  [
+    {
+      "path" : "${QOOXDOO_PATH}/tool/data/config/application.json"
+    }
+  ],
+
+  "export" :
+  [
+    "api",
+    "api-data",
+    "build",
+    "clean",
+    "distclean",
+    "fix",
+    "info",
+    "inspector",
+    "lint",
+    "migration",
+    "pretty",
+    "profiling",
+    "source",
+    "source-all",
+    "simulation-build",
+    "simulation-run",
+    "test",
+    "test-source",
+    "translation"
+  ],
+  
+  "default-job" : "source",
+
+  "let" :
+  {
+    "APPLICATION"  : "rctk",
+    "QOOXDOO_PATH" : "../qooxdoo-1.3-sdk",
+    "QXTHEME"      : "rctk.theme.Theme",
+    "API_EXCLUDE"  : ["qx.test.*", "${APPLICATION}.theme.*", "${APPLICATION}.test.*", "${APPLICATION}.simulation.*"],
+    "LOCALES"      : [ "en" ],
+    "CACHE"        : "${TMPDIR}/cache",
+    "ROOT"         : "."
+  },
+
+  // You only need to edit the remainder of this file, if you want to customize
+  // specific jobs, or add own job definitions.
+  "jobs":
+  {
+    "libraries" : 
+    {
+      "library" :
+      [
+        {
+        "manifest":"../qooxdoo-1.3-sdk/framework/Manifest.json",
+        // "uri":"/static/qx/qooxdoo-1.3-sdk/framework/"
+        "uri":"http://qx.m3r/framework/"
+        },
+        {
+        "manifest":"Manifest.json",
+        "uri":"/static/qx/rctk/"
+        }
+      ]
+    },
+
+    "source" :
+    {
+      "compile-options" : 
+      {
+        "uris" :
+        {
+          "script"          : "/static/qx/rctk/script",
+          "resource"        : "/static/qx/rctk/resource",
+          "add-nocache-param" : false
+        }
+      }
+    },
+    "source-script" :
+    {
+      "compile-options" : 
+      {
+        "uris" :
+        {
+          "script"          : "/static/qx/rctk/script",
+          "resource"        : "/static/qx/rctk/resource",
+          "add-nocache-param" : false
+        }
+      }
+    },
+    "build" :
+    {
+      "compile-options" : 
+      {
+        "uris" :
+        {
+          "script"          : "/static/qx/rctk/build/script",
+          "resource"        : "/static/qx/rctk/build/resource",
+          "add-nocache-param" : false
+        }
+      }
+    }
+  }
+}
