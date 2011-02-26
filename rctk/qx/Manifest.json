@@ -3,17 +3,17 @@
   {
     "name" : "rctk",
 
-    "summary" : "Custom Application",
-    "description" : "This is a skeleton for a custom application with qooxdoo.",
+    "summary" : "Qooxdoo frontend for RCTK",
+    "description" : "RCTK is a powerful UI toolkit for python application. It uses browser toolkits for rendering the UI.",
     
-    "homepage" : "http://some.homepage.url/",
+    "homepage" : "http://rctk.org/",
 
-    "license" : "SomeLicense",
+    "license" : "BSD",
     "authors" : 
     [
       {
-        "name" : "First Author (uid)",
-        "email" : "first.author@some.domain"
+        "name" : "Ivo van der Wijk",
+        "email" : "ivo@rctk.org"
       }
     ],
 
