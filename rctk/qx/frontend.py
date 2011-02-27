@@ -30,7 +30,9 @@ class QXFrontend(Base):
 
         if path.startswith("qx/"):
             path = "qooxdoo/qooxdoo-1.3-sdk/framework/" + path[3:]
-        else:
+        #elif path.startswith("rctk/"):
+        #    path = path[5:] # source is included in path
+        elif not path.startswith("source/"):
             path = "source/" + path 
 
         data = open(os.path.join(cls.workingdir(), path), "r").read()
