@@ -52,14 +52,16 @@
     {
       "library" :
       [
+       // this allows you to host the core qooxdoo code on a (different)
+       // webserver
         {
         "manifest":"${QOOXDOO_PATH}/framework/Manifest.json",
         // "uri":"/static/qx/qooxdoo-1.3-sdk/framework/"
-        "uri":"http://qx.m3r/framework/"
+        "uri":"/media/qx"
         },
         {
         "manifest":"Manifest.json",
-        "uri":"/static/qx/rctk/"
+        "uri":"/media"
         }
       ]
     },
@@ -70,8 +72,8 @@
       {
         "uris" :
         {
-          "script"          : "/static/qx/rctk/script",
-          "resource"        : "/static/qx/rctk/resource",
+          "script"          : "/media/script",
+          "resource"        : "/media/resource",
           "add-nocache-param" : false
         }
       }
@@ -82,8 +84,8 @@
       {
         "uris" :
         {
-          "script"          : "/static/qx/rctk/script",
-          "resource"        : "/static/qx/rctk/resource",
+          "script"          : "/media/script",
+          "resource"        : "/media/resource",
           "add-nocache-param" : false
         }
       }
@@ -94,8 +96,8 @@
       {
         "uris" :
         {
-          "script"          : "/static/qx/rctk/build/script",
-          "resource"        : "/static/qx/rctk/build/resource",
+          "script"          : "/media/script",
+          "resource"        : "/media/resource",
           "add-nocache-param" : false
         }
       }
