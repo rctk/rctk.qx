@@ -3,6 +3,8 @@ import os
 from rctk.frontend import Frontend as Base
 class QXFrontend(Base):
     name = "Qooxdoo"
+    ##qxpath = "qooxdoo/qooxdoo-trunk/framework/"
+    qxpath = "qooxdoo/qooxdoo-1.3-sdk/framework/"
     def __init__(self, tk):
         self.tk = tk
 
@@ -29,7 +31,7 @@ class QXFrontend(Base):
             type = "image/jpeg"
 
         if path.startswith("qx/"):
-            path = "qooxdoo/qooxdoo-1.3-sdk/framework/" + path[3:]
+            path = cls.qxpath + path[3:]
         #elif path.startswith("rctk/"):
         #    path = path[5:] # source is included in path
         elif not path.startswith("source/"):
