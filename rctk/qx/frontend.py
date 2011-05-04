@@ -3,7 +3,6 @@ import os
 from rctk.frontend import Frontend as Base
 class QXFrontend(Base):
     name = "Qooxdoo"
-    ##qxpath = "qooxdoo/qooxdoo-trunk/framework/"
     qxpath = "qooxdoo/qooxdoo-1.3-sdk/framework/"
     def __init__(self, tk):
         self.tk = tk
@@ -47,3 +46,7 @@ class QXFrontend(Base):
     def index_html(self):
         ## basically the same as serve_static("/media/index.html")[1]
         return open(os.path.join(self.workingdir(), "source/index.html"), "r").read()
+
+class QXFrontendTrunk(QXFrontend):
+    name = "Qooxdoo"
+    qxpath = "qooxdoo/qooxdoo-trunk/framework/"
