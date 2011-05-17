@@ -24,6 +24,7 @@
     "profiling",
     "source",
     "source-all",
+    "source-hybrid",
     "simulation-build",
     "simulation-run",
     "test",
@@ -31,18 +32,22 @@
     "translation"
   ],
   
-  "default-job" : "source",
+  "default-job" : "source-hybrid",
 
   "let" :
   {
     "APPLICATION"  : "rctk",
-    "QOOXDOO_PATH" : "qooxdoo/qooxdoo-1.3-sdk",
+    "QOOXDOO_PATH" : "qooxdoo/qooxdoo-1.4-sdk",
     "QXTHEME"      : "rctk.theme.Theme",
     "API_EXCLUDE"  : ["qx.test.*", "${APPLICATION}.theme.*", "${APPLICATION}.test.*", "${APPLICATION}.simulation.*"],
     "LOCALES"      : [ "en" ],
-    "CACHE"        : "${TMPDIR}/cache",
+    "CACHE"        : "${TMPDIR}/qx${QOOXDOO_VERSION}/cache",
     "ROOT"         : "."
   },
+
+  // You only need to edit the remainder of this file, if you want to customize
+  // specific jobs, or add own job definitions.
+
 
   // You only need to edit the remainder of this file, if you want to customize
   // specific jobs, or add own job definitions.
@@ -56,8 +61,8 @@
        // webserver
         {
         "manifest":"${QOOXDOO_PATH}/framework/Manifest.json",
-        // "uri":"/static/qx/qooxdoo-1.3-sdk/framework/"
-        "uri":"/media/qx"
+        "uri":"/media/qx",
+        "script":"/media/script"
         },
         {
         "manifest":"Manifest.json",
@@ -66,6 +71,18 @@
       ]
     },
 
+    "source-bybrid" :
+    {
+      "compile-options" : 
+      {
+        "uris" :
+        {
+          "script"          : "/media/script",
+          "resource"        : "/media/resource",
+          "add-nocache-param" : false
+        }
+      }
+    },
     "source" :
     {
       "compile-options" : 
@@ -103,4 +120,5 @@
       }
     }
   }
+
 }
