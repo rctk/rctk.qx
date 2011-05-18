@@ -1,11 +1,11 @@
 import os
+from rctk.resourceregistry import getResourceRegistry
+
 
 from rctk.frontend import Frontend as Base
 class QXFrontend(Base):
     name = "Qooxdoo"
     qxpath = "qooxdoo/qooxdoo-1.3-sdk/framework/"
-    def __init__(self, tk):
-        self.tk = tk
 
     @classmethod
     def serve(cls, path):
@@ -43,9 +43,12 @@ class QXFrontend(Base):
     def workingdir(cls):
         return os.path.dirname(__file__)
 
-    def index_html(self):
+    @classmethod
+    def index_html(cls):
         ## basically the same as serve_static("/media/index.html")[1]
-        return open(os.path.join(self.workingdir(), "source/index.html"), "r").read()
+        header = getResourceRegistry().header()
+        tpl = open(os.path.join(cls.workingdir(), "source/index.html"), "r").read()
+        return tpl.replace('<!-- rctk-header -->', header)
 
 class QXFrontendTrunk(QXFrontend):
     name = "Qooxdoo"

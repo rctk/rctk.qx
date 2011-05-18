@@ -5,6 +5,7 @@ qx.Class.define("rctk.Core",
         this.app = app;
         this.controls = {0: new rctk.Root(app.getRoot())};
         this.queue = []; 
+        this.sid = null;
     },
     members :
     {
@@ -14,12 +15,13 @@ qx.Class.define("rctk.Core",
             qx.log.Logger.debug("RCTK: start");
             var req = new qx.io.remote.Request("start", "POST", "application/json");
             req.addListener("completed", function(e) {
-                this.start(e.getContent());        
+                this.start(e.getResponseHeader('rctk-sid'), e.getContent());        
             }, this);
             req.setTimeout(100000); // XXX
             req.send();
         },
-        start: function(data) {
+        start: function(sid, data) {
+            this.sid = sid;
             if('title' in data) {
                 document.title = data.title;
             }
@@ -27,6 +29,7 @@ qx.Class.define("rctk.Core",
             req.addListener("completed", function(e) {
                 this.handle_tasks(e.getContent());
             }, this);
+            req.setRequestHeader('rctk-sid', this.sid);
             req.setTimeout(100000);
             req.send();
         },
@@ -140,6 +143,7 @@ qx.Class.define("rctk.Core",
             if(this.queue.length > 0) {
                 // show_throbber()
                 var req = new qx.io.remote.Request("task", "POST", "application/json");
+                req.setRequestHeader('rctk-sid', this.sid);
                 req.setData("queue="+qx.lang.Json.stringify(this.queue));
                 req.addListener("completed", function(e) {
                     this.handle_tasks(e.getContent());
