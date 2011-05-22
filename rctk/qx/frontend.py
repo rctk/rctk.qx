@@ -17,6 +17,7 @@ class QXFrontend(Base):
         path = path.replace("..", "") ## .. tricks
         
         type = "application/data"
+        
         if path.endswith("css"):
             type = "text/css"
         elif path.endswith("js"):
@@ -28,7 +29,7 @@ class QXFrontend(Base):
         elif path.endswith("jpg"):
             type = "image/jpeg"
 
-        elif not path.startswith("source/"):
+        if not path.startswith("source/"):
             path = "source/" + path 
 
         data = open(os.path.join(cls.workingdir(), path), "r").read()
