@@ -5,7 +5,6 @@ from rctk.resourceregistry import getResourceRegistry
 from rctk.frontend import Frontend as Base
 class QXFrontend(Base):
     name = "Qooxdoo"
-    qxpath = "qooxdoo/qooxdoo-1.3-sdk/framework/"
 
     @classmethod
     def serve(cls, path):
@@ -29,10 +28,6 @@ class QXFrontend(Base):
         elif path.endswith("jpg"):
             type = "image/jpeg"
 
-        if path.startswith("qx/"):
-            path = cls.qxpath + path[3:]
-        #elif path.startswith("rctk/"):
-        #    path = path[5:] # source is included in path
         elif not path.startswith("source/"):
             path = "source/" + path 
 
