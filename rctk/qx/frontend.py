@@ -6,6 +6,8 @@ from rctk.frontend import Frontend as Base
 class QXFrontend(Base):
     name = "Qooxdoo"
 
+    qxbase = "qooxdoo/qooxdoo-1.4-sdk/framework"
+
     @classmethod
     def serve(cls, path):
         """
@@ -29,7 +31,10 @@ class QXFrontend(Base):
         elif path.endswith("jpg"):
             type = "image/jpeg"
 
-        if not path.startswith("source/"):
+        ## requests to /media/qx map to the qx framework directory
+        if path.startswith("qx/"):
+            path = cls.qxbase + '/' + path[3:]
+        elif not path.startswith("source/"):
             path = "source/" + path 
 
         data = open(os.path.join(cls.workingdir(), path), "r").read()

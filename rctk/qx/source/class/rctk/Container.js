@@ -8,7 +8,7 @@ qx.Class.define("rctk.Container", {
         this.tab = true;
     },
     members: {
-        add: function(control) {
+        add: function(control, data) {
             // has a layout been set at all?
             if(this.container === null) {
                 this.debug("Init container " + this.control);
@@ -17,7 +17,7 @@ qx.Class.define("rctk.Container", {
                 this.container.setLayout(layout);
             }
             if(this.tab) {
-                var p = new qx.ui.tabview.Page("Tab Page");
+                var p = new qx.ui.tabview.Page(data.title || "new tab");
                 // simpler layout?
                 p.setLayout(new qx.ui.layout.Grid(0, 0));
                 this.container.add(p, {'row':0, 'column':0});
@@ -62,7 +62,7 @@ qx.Class.define("rctk.Container", {
                 // control.control.setAlignX / Y
                 // left/center/right/null/top/middle/bottom/baseline
                 // allowGrowX/Y
-                this.container.add(control.control, {row:cell.row, column:cell.column})
+                this.container.add(control.control, {row:cell.row, column:cell.column, rowSpan:cell.rowspan||1, colSpan:cell.colspan||1})
             }
         }
     }

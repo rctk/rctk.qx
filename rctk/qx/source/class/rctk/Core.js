@@ -95,6 +95,15 @@ qx.Class.define("rctk.Core",
             case "panel":
                 control = new rctk.Panel(task.id);
                 break;
+            case "checkbox":
+                control = new rctk.Checkbox(task.id, task.text);
+                break;
+            case "text":
+                control = new rctk.Text(task.id, task);
+                break;
+            case "date":
+                control = new rctk.Date(task.id, task);
+                break;
             default:
                 this.error("Unknown control: " + task.control);
                 return;
@@ -111,7 +120,7 @@ qx.Class.define("rctk.Core",
             var container = this.controls[task.id];
             var child = this.controls[task.child];
 
-            container.add(child);
+            container.add(child, task);
         },
         layout: function(task) {
             // invoked when layout is set, contains explicit configuration
