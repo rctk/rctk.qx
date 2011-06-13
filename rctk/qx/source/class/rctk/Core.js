@@ -6,9 +6,8 @@ qx.Class.define("rctk.Core",
         this.controls = {0: new rctk.Root(app.getRoot())};
         this.sid = null;
             var self=this;
-            rctk.core.setRequest(function(a, b, c, d) { self.rctk_request(a, b, c, d); });
-            rctk.core.setHandle(function(a) { self.handle_task(a); });
-
+            rctk.core.handlers.request = rctk.util.proxy(this.rctk_request, this);
+            rctk.core.handlers.handle = rctk.util.proxy(this.handle_task, this);
     },
     members :
     {
@@ -23,8 +22,6 @@ qx.Class.define("rctk.Core",
             if(sessionid) {
                 req.setRequestHeader('rctk-sid', sessionid);
             }
-            qx.log.Logger.debug("RCTK: DATA");
-            console.log(data);
             if(data) {
                 req.setData(data);
             }
