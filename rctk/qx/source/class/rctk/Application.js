@@ -36,6 +36,7 @@ qx.Class.define("rctk.Application",
       // Enable logging in debug variant
       if (qx.core.Variant.isSet("qx.debug", "on"))
       {
+        qx.core.Init.getApplication().getRoot().setNativeContextMenu(true);
         // support native logging capabilities, e.g. Firebug for Firefox
         qx.log.appender.Native;
         // support additional cross-browser console. Press F7 to toggle visibility
@@ -50,6 +51,7 @@ qx.Class.define("rctk.Application",
       //var main = new rctk.Window("rctk");
       //main.open();
       
+      // name somewhat conflicting with rctk.core -- make it qxCore?
       var core = new rctk.Core(this);
       core.run();
     }

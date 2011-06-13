@@ -1,4 +1,6 @@
 import os
+import rctk.core ## loads rctk.core js dependencies
+
 from rctk.resourceregistry import getResourceRegistry
 
 
