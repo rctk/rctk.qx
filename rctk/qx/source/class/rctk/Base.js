@@ -21,6 +21,8 @@ qx.Class.define("rctk.Base", {
                 break;
             }
         },
+        create: function(init) {
+        },
         update: function(update) {
         }
     }

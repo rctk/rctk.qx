@@ -8,7 +8,7 @@ qx.Class.define("rctk.Container", {
         this.tab = true;
     },
     members: {
-        add: function(control, data) {
+        append: function(control, data) {
             // has a layout been set at all?
             if(this.container === null) {
                 this.debug("Init container " + this.control);
@@ -46,7 +46,7 @@ qx.Class.define("rctk.Container", {
                 this.error("No layout set");
             }
         },
-        performLayout: function(config) {
+        relayout: function(config) {
             if(this.tab) {
                 return;
             }

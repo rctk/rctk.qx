@@ -1,13 +1,17 @@
 qx.Class.define("rctk.Core",
 {
     extend : qx.core.Object,
+
     construct: function(app) { 
         this.app = app;
-        this.controls = {0: new rctk.Root(app.getRoot())};
+        this.root = new rctk.Root(app.getRoot());
+        this.controls = {0: this.root};
         this.sid = null;
-            var self=this;
-            rctk.core.handlers.request = rctk.util.proxy(this.rctk_request, this);
-            rctk.core.handlers.handle = rctk.util.proxy(this.handle_task, this);
+        var self=this;
+        this.core = new rctk.core();
+        this.core.handlers.request = rctk.util.proxy(this.rctk_request, this);
+        this.core.handlers.handle = rctk.util.proxy(this.handle_task, this);
+        this.core.handlers.construct = rctk.util.proxy(this.construct_control, this);
     },
     members :
     {
@@ -28,9 +32,44 @@ qx.Class.define("rctk.Core",
             req.setTimeout(100000); // XXX
             req.send();
         },
+        construct_control: function(class, parent, id) {
+            var control;
+            switch(class) {
+            case "button":
+                control = new rctk.Button(id);
+                break;
+            case "window":
+                control = new rctk.Window(id);
+                break;
+            case "statictext":
+                control = new rctk.StaticText(id);
+                break;
+            case "statichtmltext":
+                control = new rctk.StaticHTMLText(id);
+                break;
+            case "panel":
+                control = new rctk.Panel(id);
+                break;
+            case "checkbox":
+                control = new rctk.Checkbox(id);
+                break;
+            case "text":
+                control = new rctk.Text(id);
+                break;
+            case "date":
+                control = new rctk.Date(id);
+                break;
+            default:
+                this.error("Unknown control: " + task.control);
+                return;
+                break;
+            }
+            return control;
+            //control.addListener('event', function(e) { this.event_fired(e); }, this);
+        },
         run: function() {
             qx.log.Logger.debug("RCTK: start");
-            rctk.core.run();
+            this.core.run(this.root);
         },
         handle_task: function(task) {
             this.debug("RCTK: task:");
@@ -111,7 +150,7 @@ qx.Class.define("rctk.Core",
             var container = this.controls[task.id];
             var child = this.controls[task.child];
 
-            container.add(child, task);
+            container.append(child, task);
         },
         layout: function(task) {
             // invoked when layout is set, contains explicit configuration
@@ -134,9 +173,9 @@ qx.Class.define("rctk.Core",
             this.debug("Event fired");
             console.log(e);
             var data = e.getData();
-            rctk.core.push({'method':'event', 'type':data.type, 'id':data.control.id, 'data':{}});
-            rctk.core.flush(); 
-        },
+            this.core.push({'method':'event', 'type':data.type, 'id':data.control.id, 'data':{}});
+            this.core.flush(); 
+        }
     }
 
 });
