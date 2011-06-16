@@ -23,7 +23,7 @@ qx.Class.define("rctk.Base", {
         },
         create: function(init) {
         },
-        update: function(update) {
+        set_properties: function(update) {
         }
     }
 

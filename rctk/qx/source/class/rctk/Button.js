@@ -2,8 +2,7 @@ qx.Class.define("rctk.Button",
 {
     extend : rctk.Base,
 
-    construct : function(id)
-    {
+    construct : function(id) {
         this.base(arguments, id);
     },
     members: {

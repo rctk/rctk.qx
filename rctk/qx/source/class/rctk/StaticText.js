@@ -2,15 +2,17 @@ qx.Class.define("rctk.StaticText",
 {
     extend: rctk.Base,
 
-    construct : function(id, text)
+    construct : function(id)
     {
         this.base(arguments, id);
-        this.debug("Adding statictext " + text);
-        this.control = new qx.ui.basic.Label(text);
     },
     members: {
-        update: function(update) {
-            this.base(arguments);
+        create: function(data) {
+            this.base(arguments, data);
+            this.control = new qx.ui.basic.Label(data.text || '');
+        },
+        set_properties: function(update) {
+            this.base(arguments, update);
             if('text' in update) {
                 this.control.setValue(update.text);
             }

@@ -10,7 +10,6 @@ qx.Class.define("rctk.Core",
         var self=this;
         this.core = new rctk.core();
         this.core.handlers.request = rctk.util.proxy(this.rctk_request, this);
-        this.core.handlers.handle = rctk.util.proxy(this.handle_task, this);
         this.core.handlers.construct = rctk.util.proxy(this.construct_control, this);
     },
     members :
@@ -32,9 +31,9 @@ qx.Class.define("rctk.Core",
             req.setTimeout(100000); // XXX
             req.send();
         },
-        construct_control: function(class, parent, id) {
+        construct_control: function(klass, parent, id) {
             var control;
-            switch(class) {
+            switch(klass) {
             case "button":
                 control = new rctk.Button(id);
                 break;
@@ -62,106 +61,13 @@ qx.Class.define("rctk.Core",
             default:
                 this.error("Unknown control: " + task.control);
                 return;
-                break;
             }
+            control.addListener('event', function(e) { this.event_fired(e); }, this);
             return control;
-            //control.addListener('event', function(e) { this.event_fired(e); }, this);
         },
         run: function() {
             qx.log.Logger.debug("RCTK: start");
             this.core.run(this.root);
-        },
-        handle_task: function(task) {
-            this.debug("RCTK: task:");
-            //qx.dev.Debug.debugObject(task);
-            console.log(task);
-
-
-            switch(task.action) {
-            case "append":
-                this.append(task);
-                break;
-            case "remove":
-                break;
-            case "create":
-                this.create(task);
-                break;
-            case "destroy":
-                break;
-            case "update":
-                this.update(task);
-                break;
-            case "call":
-                break;
-            case "handler":
-                this.handler(task);
-                break;
-            case "layout":
-                this.layout(task);
-                break;
-            case "relayout":
-                this.relayout(task);
-                break;
-            case "timer":
-                break;
-            }
-        },
-        create: function(task) {
-            var control;
-            switch(task.control) {
-            case "button":
-                qx.log.Logger.debug("Setting button text to " + task.text);
-                control = new rctk.Button(task.id, task.text);
-                break;
-            case "window":
-                control = new rctk.Window(task.id, task.title);
-                break;
-            case "statictext":
-                control = new rctk.StaticText(task.id, task.text);
-                break;
-            case "statichtmltext":
-                control = new rctk.StaticHTMLText(task.id, task.text);
-                break;
-            case "panel":
-                control = new rctk.Panel(task.id);
-                break;
-            case "checkbox":
-                control = new rctk.Checkbox(task.id, task.text);
-                break;
-            case "text":
-                control = new rctk.Text(task.id, task);
-                break;
-            case "date":
-                control = new rctk.Date(task.id, task);
-                break;
-            default:
-                this.error("Unknown control: " + task.control);
-                return;
-                break;
-            }
-            this.controls[task.id] = control;
-            control.addListener('event', function(e) { this.event_fired(e); }, this);
-        },
-        update: function(task) {
-            var control = this.controls[task.id];
-            control.update(task.update);
-        },
-        append: function(task) {
-            var container = this.controls[task.id];
-            var child = this.controls[task.child];
-
-            container.append(child, task);
-        },
-        layout: function(task) {
-            // invoked when layout is set, contains explicit configuration
-            var container = this.controls[task.id];
-            container.setLayout(task.type);
-
-        },
-        relayout: function(task) {
-            // invoked when relayout is done, after explicit layout(). Contains calculated config
-            var container = this.controls[task.id];
-            container.performLayout(task.config);
         },
         handler: function(task) {
             var control = this.controls[task.id];
