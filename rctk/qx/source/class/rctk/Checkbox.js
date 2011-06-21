@@ -2,9 +2,9 @@ qx.Class.define("rctk.Checkbox",
 {
     extend : rctk.Base,
 
-    construct : function(id)
+    construct : function(core, id)
     {
-        this.base(arguments, id);
+        this.base(arguments, core, id);
         // group is a groupid. If it doesn't exist already, create it,
         // else use and add
         this.control = new qx.ui.form.RadioButton(text);

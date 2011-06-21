@@ -2,9 +2,9 @@ qx.Class.define("rctk.Panel",
 {
     extend : rctk.Container,
 
-    construct : function(id)
+    construct : function(core, id)
     {
-        this.base(arguments, id);
+        this.base(arguments, core, id);
         this.control = new qx.ui.container.Composite();
         this.tab = false;
     },

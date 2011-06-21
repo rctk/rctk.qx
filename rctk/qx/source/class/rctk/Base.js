@@ -7,8 +7,9 @@ qx.Class.define("rctk.Base", {
         'event':"qx.event.type.Data"
     },
 
-    construct: function(id) {
+    construct: function(core, id) {
         this.base(arguments);
+        this.core = core;
         this.id = id;
         this.enabled = {};
     },
@@ -24,6 +25,9 @@ qx.Class.define("rctk.Base", {
         create: function(init) {
         },
         set_properties: function(update) {
+        },
+        value: function() {
+            // return the current value for this control
         }
     }
 

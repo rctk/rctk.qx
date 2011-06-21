@@ -4,7 +4,7 @@ qx.Class.define("rctk.Core",
 
     construct: function(app) { 
         this.app = app;
-        this.root = new rctk.Root(app.getRoot());
+        this.root = new rctk.Root(this, app.getRoot());
         this.controls = {0: this.root};
         this.sid = null;
         var self=this;
@@ -35,28 +35,31 @@ qx.Class.define("rctk.Core",
             var control;
             switch(klass) {
             case "button":
-                control = new rctk.Button(id);
+                control = new rctk.Button(this, id);
                 break;
             case "window":
-                control = new rctk.Window(id);
+                control = new rctk.Window(this, id);
                 break;
             case "statictext":
-                control = new rctk.StaticText(id);
+                control = new rctk.StaticText(this, id);
                 break;
             case "statichtmltext":
-                control = new rctk.StaticHTMLText(id);
+                control = new rctk.StaticHTMLText(this, id);
                 break;
             case "panel":
-                control = new rctk.Panel(id);
+                control = new rctk.Panel(this, id);
                 break;
             case "checkbox":
-                control = new rctk.Checkbox(id);
+                control = new rctk.Checkbox(this, id);
                 break;
             case "text":
-                control = new rctk.Text(id);
+                control = new rctk.Text(this, id);
                 break;
             case "date":
-                control = new rctk.Date(id);
+                control = new rctk.Date(this, id);
+                break;
+            case "dropdown":
+                control = new rctk.Dropdown(this, id);
                 break;
             default:
                 this.error("Unknown control: " + task.control);
@@ -80,6 +83,11 @@ qx.Class.define("rctk.Core",
             console.log(e);
             var data = e.getData();
             this.core.push({'method':'event', 'type':data.type, 'id':data.control.id, 'data':{}});
+            this.core.flush(); 
+        },
+        sync: function(control) {
+            // a control notifies that its value has changed.
+            this.core.push({'method': 'sync', 'type': 'sync', 'id':control.id, 'data':control.value()});
             this.core.flush(); 
         }
     }

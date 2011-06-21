@@ -2,9 +2,9 @@ qx.Class.define("rctk.Date",
 {
     extend: rctk.Base,
 
-    construct : function(id, data)
+    construct : function(core, id)
     {
-        this.base(arguments, id);
+        this.base(arguments, core, id);
         // XXX initial value
         this.control = new qx.ui.form.DateField();
     },

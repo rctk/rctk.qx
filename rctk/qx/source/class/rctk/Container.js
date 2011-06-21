@@ -1,8 +1,8 @@
 qx.Class.define("rctk.Container", {
     extend: rctk.Base,
 
-    construct: function(id) {
-        this.base(arguments, id);
+    construct: function(core, id) {
+        this.base(arguments, core, id);
         this.container = null;
         this.children = {};
         this.tab = true;

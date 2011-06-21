@@ -2,9 +2,9 @@ qx.Class.define("rctk.StaticText",
 {
     extend: rctk.Base,
 
-    construct : function(id)
+    construct : function(core, id)
     {
-        this.base(arguments, id);
+        this.base(arguments, core, id);
     },
     members: {
         create: function(data) {

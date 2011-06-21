@@ -2,12 +2,14 @@ qx.Class.define("rctk.Window",
 {
     extend: rctk.Container,
 
-    construct : function(id, title)
+    construct : function(core, id)
     {
-        this.base(arguments, id)
-        this.control = new qx.ui.window.Window(title);
+        this.base(arguments, core, id);
     },
     members: {
+        create: function(data) {
+            this.control = new qx.ui.window.Window(data.title || "Window");
+        },
         update: function(update) {
             this.base(arguments, update);
             if('state' in update) {
