@@ -1,15 +1,17 @@
 qx.Class.define("rctk.Date",
 {
-    extend: rctk.Base,
+    extend: rctk.Text,
 
     construct : function(core, id)
     {
         this.base(arguments, core, id);
-        // XXX initial value
-        this.control = new qx.ui.form.DateField();
     },
     members: {
-        update: function(update) {
+        create: function(data) {
+            this.control = new qx.ui.form.DateField(data.value || "");
+            this.install_listeners();
+        },
+        set_properties: function(update) {
             this.base(arguments);
             if('text' in update) {
                 this.control.setValue(update.text);

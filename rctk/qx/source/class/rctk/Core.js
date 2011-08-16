@@ -82,12 +82,23 @@ qx.Class.define("rctk.Core",
             this.debug("Event fired");
             console.log(e);
             var data = e.getData();
-            this.core.push({'method':'event', 'type':data.type, 'id':data.control.id, 'data':{}});
+            if(data.sync) {
+                this.core.push({'method':'sync', 'type':'sync', 
+                                'id':data.control.id, 
+                                data:{'value':data.control.value()}});
+            }
+            this.core.push({'method':'event', 
+                            'type':data.type, 
+                            'id':data.control.id, 
+                            'data':{}});
             this.core.flush(); 
         },
         sync: function(control) {
             // a control notifies that its value has changed.
-            this.core.push({'method': 'sync', 'type': 'sync', 'id':control.id, 'data':control.value()});
+            this.core.push({'method':'sync', 
+                            'type':'sync',
+                            'id':control.id, 
+                            'data':control.value()});
             this.core.flush(); 
         }
     }

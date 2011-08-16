@@ -20,6 +20,15 @@ qx.Class.define("rctk.Base", {
             case 'click':
                 this.enabled.click = true;
                 break;
+            case 'submit':
+                this.enabled.submit = true;
+                break;
+            case 'keypress':
+                this.enabled.keypress = true;
+                break;
+            case 'change':
+                this.enabled.change = true;
+                break;
             }
         },
         create: function(init) {
