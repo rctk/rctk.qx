@@ -34,7 +34,7 @@ qx.Class.define("rctk.Application",
       this.base(arguments);
 
       // Enable logging in debug variant
-      if (qx.core.Variant.isSet("qx.debug", "on"))
+      if (qx.core.Environment.get("qx.debug"))
       {
         qx.core.Init.getApplication().getRoot().setNativeContextMenu(true);
         // support native logging capabilities, e.g. Firebug for Firefox

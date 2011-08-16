@@ -37,7 +37,7 @@
   "let" :
   {
     "APPLICATION"  : "rctk",
-    "QOOXDOO_PATH" : "qooxdoo/qooxdoo-1.4-sdk",
+    "QOOXDOO_PATH" : "qooxdoo/qooxdoo-1.5-sdk",
     "QXTHEME"      : "rctk.theme.Theme",
     "API_EXCLUDE"  : ["qx.test.*", "${APPLICATION}.theme.*", "${APPLICATION}.test.*", "${APPLICATION}.simulation.*"],
     "LOCALES"      : [ "en" ],

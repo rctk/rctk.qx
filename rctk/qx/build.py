@@ -2,7 +2,7 @@
 
 import os
 
-os.system("qooxdoo/qooxdoo-1.4-sdk/tool/bin/generator.py")
+os.system("qooxdoo/qooxdoo-1.5-sdk/tool/bin/generator.py")
 
 f = open("source/script/rctk.js", "r")
 data = f.read()
