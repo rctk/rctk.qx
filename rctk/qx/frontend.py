@@ -2,13 +2,13 @@ import os
 import rctk.core ## loads rctk.core js dependencies
 
 from rctk.resourceregistry import getResourceRegistry
-
+from rctk.qx.config import VERSION
 
 from rctk.frontend import Frontend as Base
 class QXFrontend(Base):
     name = "Qooxdoo"
 
-    qxbase = "qooxdoo/qooxdoo-1.4-sdk/framework"
+    qxbase = "qooxdoo/qooxdoo-%s-sdk/framework" % VERSION
 
     @classmethod
     def serve(cls, path):

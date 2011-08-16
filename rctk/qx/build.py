@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 import os
+from config import VERSION
 
-os.system("qooxdoo/qooxdoo-1.5-sdk/tool/bin/generator.py")
+os.system("qooxdoo/qooxdoo-%s-sdk/tool/bin/generator.py" % VERSION)
 
 f = open("source/script/rctk.js", "r")
 data = f.read()
