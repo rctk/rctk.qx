@@ -62,7 +62,7 @@ qx.Class.define("rctk.Core",
                 control = new rctk.Dropdown(this, id);
                 break;
             default:
-                this.error("Unknown control: " + task.control);
+                this.error("Unknown control: " + klass);
                 return;
             }
             control.addListener('event', function(e) { this.event_fired(e); }, this);
