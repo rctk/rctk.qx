@@ -9,6 +9,7 @@ qx.Class.define("rctk.Date",
     members: {
         create: function(data) {
             this.control = new qx.ui.form.DateField(data.value || "");
+            this.control.setDateFormat(new qx.util.format.DateFormat("YYYY-MM-dd"));
             this.install_listeners();
         },
         set_properties: function(update) {
