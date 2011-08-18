@@ -55,6 +55,9 @@ qx.Class.define("rctk.Text",
                 this.fireDataEvent("event", 
                     {'type':'change', 'control':this, 'sync':true});
             }
+            else {
+                this.core.sync(this);
+            }
         }
     }
 });

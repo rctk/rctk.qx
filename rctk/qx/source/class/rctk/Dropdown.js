@@ -9,11 +9,11 @@ qx.Class.define("rctk.Dropdown",
         clicked: function(e) {
             if(this.enabled.click) {
                 qx.log.Logger.debug("Button clicked");
-                this.fireDataEvent('event', {'type':'click', 'control':this});
+                this.fireDataEvent('event', {'type':'click', 'control':this, 'sync':true});
             }
-        },
-        changed: function(e) {
-            this.core.sync(this);
+            else {
+                this.core.sync(this);
+            }
         },
         create: function(data) {
             this.control = new qx.ui.form.SelectBox();
@@ -26,10 +26,8 @@ qx.Class.define("rctk.Dropdown",
             }
             this.controller = new qx.data.controller.List(this.model, this.control, "label");
 
-            //this.control.addListener("execute", function(e) 
-            //    { this.clicked(e); }, this);
             this.controller.addListener("changeSelection", function(e) 
-                { this.changed(e); }, this);
+                { this.clicked(e); }, this);
         },
         set_properties: function(data) {
         },
@@ -39,8 +37,7 @@ qx.Class.define("rctk.Dropdown",
         },
         value: function() {
             console.log(this.controller.getSelection().getItem(0).getId());
-            return this.controller.getSelection().getItem(0).getId();
-            
+            return {'selection':this.controller.getSelection().getItem(0).getId()};
         }
     }
 });
