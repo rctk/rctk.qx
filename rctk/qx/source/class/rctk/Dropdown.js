@@ -9,7 +9,8 @@ qx.Class.define("rctk.Dropdown",
         clicked: function(e) {
             if(this.enabled.click) {
                 qx.log.Logger.debug("Button clicked");
-                this.fireDataEvent('event', {'type':'click', 'control':this, 'sync':true});
+                this.fireDataEvent('event', {'type':'click', 
+                                             'control':this, 'sync':true});
             }
             else {
                 this.core.sync(this);
@@ -21,23 +22,59 @@ qx.Class.define("rctk.Dropdown",
 
             if(data.items) {
                 for(var i=0; i < data.items.length; i++) {
-                    this.model.push(qx.data.marshal.Json.createModel({'id':data.items[i][0], 'label':data.items[i][1]}));
+                    this.model.push(qx.data.marshal.Json.createModel(
+                         {'id':data.items[i][0], 
+                          'label':data.items[i][1]}));
                 }
             }
-            this.controller = new qx.data.controller.List(this.model, this.control, "label");
+            this.controller = new qx.data.controller.List(this.model, 
+                                                          this.control, 
+                                                          "label");
 
-            this.controller.addListener("changeSelection", function(e) 
-                { this.clicked(e); }, this);
+            this.install_listeners();
+        },
+        install_listeners: function() {
+            this.changeselection = this.control.addListener("changeSelection", 
+                 function(e) { this.clicked(e); }, this);
+        },
+        remove_listeners: function() {
+            if(this.changeselection) {
+                this.control.removeListenerById(this.changeselection);
+            }
+            this.changeselection = null;
         },
         set_properties: function(data) {
-        },
-        append_item: function(key, label) {
-            var tempItem = new qx.ui.form.ListItem(label);
-            //this.control.add(tempItem);
+            this.remove_listeners();
+            if('selection' in data) {
+                if(data.selection === null) {
+                    this.control.resetSelection();
+                }
+                else {
+                    for(var i = 0; i < this.model.length; i++) {
+                        var m = this.model.getItem(i);
+                        if(m.get("id") == data.selection) {
+                            this.control.setModelSelection([m]);
+                            break; // single select
+                        }
+                    }
+                }
+            }
+            else if('item' in data) {
+                this.model.push(qx.data.marshal.Json.createModel(
+                     {'id':data.item[0], 
+                      'label':data.item[1]}));
+            }
+            else if('clear' in data && data.clear) {
+                this.model.removeAll();
+            }
+            this.install_listeners();
         },
         value: function() {
-            console.log(this.controller.getSelection().getItem(0).getId());
-            return {'selection':this.controller.getSelection().getItem(0).getId()};
+            var selection = this.controller.getSelection();
+            if(selection.length) {
+                return {'selection':this.controller.getSelection().getItem(0).get("id")};
+            }
+            return {'selection':null};
         }
     }
 });

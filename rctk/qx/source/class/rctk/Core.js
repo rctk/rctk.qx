@@ -85,7 +85,7 @@ qx.Class.define("rctk.Core",
             if(data.sync) {
                 this.core.push({'method':'sync', 'type':'sync', 
                                 'id':data.control.id, 
-                                data:{'value':data.control.value()}});
+                                'data':data.control.value()});
             }
             this.core.push({'method':'event', 
                             'type':data.type, 
