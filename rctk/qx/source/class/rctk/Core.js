@@ -61,6 +61,9 @@ qx.Class.define("rctk.Core",
             case "dropdown":
                 control = new rctk.Dropdown(this, id);
                 break;
+            case "list":
+                control = new rctk.List(this, id);
+                break;
             default:
                 this.error("Unknown control: " + klass);
                 return;
