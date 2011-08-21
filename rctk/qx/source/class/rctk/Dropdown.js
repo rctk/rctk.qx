@@ -45,6 +45,14 @@ qx.Class.define("rctk.Dropdown",
         },
         set_properties: function(data) {
             this.remove_listeners();
+            if('item' in data) {
+                this.model.push(qx.data.marshal.Json.createModel(
+                     {'id':data.item[0], 
+                      'label':data.item[1]}));
+            }
+            if('clear' in data && data.clear) {
+                this.model.removeAll();
+            }
             if('selection' in data) {
                 if(data.selection === null) {
                     this.control.resetSelection();
@@ -58,14 +66,6 @@ qx.Class.define("rctk.Dropdown",
                         }
                     }
                 }
-            }
-            else if('item' in data) {
-                this.model.push(qx.data.marshal.Json.createModel(
-                     {'id':data.item[0], 
-                      'label':data.item[1]}));
-            }
-            else if('clear' in data && data.clear) {
-                this.model.removeAll();
             }
             this.install_listeners();
         },
