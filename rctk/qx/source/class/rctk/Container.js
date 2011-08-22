@@ -17,6 +17,8 @@ qx.Class.define("rctk.Container", {
                 this.container.setLayout(layout);
             }
             if(this.tab) {
+               // adding to a tab results in creating a new tab and adding
+               // there.
                 var p = new qx.ui.tabview.Page(data.title || "new tab");
                 // simpler layout?
                 p.setLayout(new qx.ui.layout.Grid(0, 0));
@@ -25,6 +27,7 @@ qx.Class.define("rctk.Container", {
                 p.add(control.control, {'row':0, 'column':0});
             }
             else {
+                // delay the actual adding until relayout
                 this.children[control.id] = control;
             }
         },
@@ -37,8 +40,8 @@ qx.Class.define("rctk.Container", {
             }
             else if(type == "tabbed") {
                 this.container = new qx.ui.tabview.TabView();
-                layout = new qx.ui.layout.Grid(0, 0);
-                this.control.setLayout(layout);
+                //layout = new qx.ui.layout.Grid(0, 0);
+                //this.control.setLayout(layout);
                 this.control.add(this.container, {'row':0, 'column':0});
                 this.tab = true;
             }
@@ -62,7 +65,7 @@ qx.Class.define("rctk.Container", {
                 // control.control.setAlignX / Y
                 // left/center/right/null/top/middle/bottom/baseline
                 // allowGrowX/Y
-                this.container.add(control.control, {row:cell.row, column:cell.column, rowSpan:cell.rowspan||1, colSpan:cell.colspan||1})
+                this.container.add(control.control, {row:cell.row, column:cell.column, rowSpan:cell.rowspan||1, colSpan:cell.colspan||1});
             }
         }
     }

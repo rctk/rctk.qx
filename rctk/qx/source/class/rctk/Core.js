@@ -7,7 +7,6 @@ qx.Class.define("rctk.Core",
         this.root = new rctk.Root(this, app.getRoot());
         this.controls = {0: this.root};
         this.sid = null;
-        var self=this;
         this.core = new rctk.core();
         this.core.handlers.request = rctk.util.proxy(this.rctk_request, this);
         this.core.handlers.construct = rctk.util.proxy(this.construct_control, this);
