@@ -19,6 +19,9 @@ qx.Class.define("rctk.CheckBox",
                 this.fireDataEvent('event', {'type':'click', 'control':this, 
                                              'sync':true});
             }
+            else {
+                this.core.sync(this);
+            }
         },
         set_properties: function(data) {
             if('text' in data) {
