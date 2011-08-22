@@ -49,7 +49,7 @@ qx.Class.define("rctk.Core",
                 control = new rctk.Panel(this, id);
                 break;
             case "checkbox":
-                control = new rctk.Checkbox(this, id);
+                control = new rctk.CheckBox(this, id);
                 break;
             case "text":
                 control = new rctk.Text(this, id);

@@ -1,4 +1,4 @@
-qx.Class.define("rctk.Checkbox",
+qx.Class.define("rctk.RadioButton",
 {
     extend : rctk.Base,
 
