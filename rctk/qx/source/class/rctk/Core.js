@@ -10,6 +10,7 @@ qx.Class.define("rctk.Core",
         this.core = new rctk.core();
         this.core.handlers.request = rctk.util.proxy(this.rctk_request, this);
         this.core.handlers.construct = rctk.util.proxy(this.construct_control, this);
+        this.radiogroups = {};
     },
     members :
     {
@@ -50,6 +51,9 @@ qx.Class.define("rctk.Core",
                 break;
             case "checkbox":
                 control = new rctk.CheckBox(this, id);
+                break;
+            case "radiobutton":
+                control = new rctk.RadioButton(this, id);
                 break;
             case "text":
                 control = new rctk.Text(this, id);
@@ -105,6 +109,12 @@ qx.Class.define("rctk.Core",
                             'id':control.id, 
                             'data':control.value()});
             this.core.flush(); 
+        },
+        get_radiogroup: function(name) {
+            if(!(name in this.radiogroups)) {
+                this.radiogroups[name] = new qx.ui.form.RadioGroup();
+            }
+            return this.radiogroups[name];
         }
     }
 

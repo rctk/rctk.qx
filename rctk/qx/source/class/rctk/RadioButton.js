@@ -8,16 +8,36 @@ qx.Class.define("rctk.RadioButton",
     },
     members: {
         create: function(data) {
-            // group is a groupid. If it doesn't exist already, create it,
-            // else use and add
-            this.control = new qx.ui.form.RadioButton(data.text);
+            this.control = new qx.ui.form.RadioButton(data.text || '');
+            if('checked' in data) {
+                this.control.setValue(data.checked);
+            }
             this.control.addListener("execute", function(e) { this.clicked(e); }, this);
         },
         clicked: function(e) {
             if(this.enabled.click) {
-                qx.log.Logger.debug("RadioButton clicked");
-                this.fireDataEvent('event', {'type':'click', 'control':this});
+                this.fireDataEvent('event', {'type':'click', 'control':this, 
+                                             'sync':true});
             }
+            else {
+                this.core.sync(this);
+            }
+        },
+        set_properties: function(data) {
+            if('text' in data) {
+                this.control.setLabel(data.checked);
+            }
+            if('checked' in data) {
+                this.control.setValue(data.checked);
+            }
+            if('group' in data && data.group) {
+                // make this something static in rctk.RadioButton?
+                var g = this.core.get_radiogroup(data.group);
+                g.add(this.control);
+            }
+        },
+        value: function() {
+            return {'checked':this.control.getValue()};
         }
     }
 });
