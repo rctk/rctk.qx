@@ -14,8 +14,6 @@ qx.Class.define("rctk.Core",
     },
     members :
     {
-        app: null,
-
         rctk_request: function(path, callback, sessionid, data) {
             console.log(arguments);
             var req = new qx.io.remote.Request(path, "POST", "application/json");
@@ -39,6 +37,7 @@ qx.Class.define("rctk.Core",
                 break;
             case "window":
                 control = new rctk.Window(this, id);
+                //this.app.getRoot().add(control);
                 break;
             case "statictext":
                 control = new rctk.StaticText(this, id);

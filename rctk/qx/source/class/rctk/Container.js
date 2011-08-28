@@ -67,6 +67,11 @@ qx.Class.define("rctk.Container", {
                 // allowGrowX/Y
                 this.container.add(control.control, {row:cell.row, column:cell.column, rowSpan:cell.rowspan||1, colSpan:cell.colspan||1});
             }
+        },
+        remove: function(child, data) {
+            qx.log.Logger.debug("container remove not implemented");
+            console.log(child);
+            console.log(data);
         }
     }
 });

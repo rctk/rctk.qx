@@ -16,20 +16,7 @@ qx.Class.define("rctk.Base", {
     members: {
         events: {},
         handle: function(type) {
-            switch(type) {
-            case 'click':
-                this.enabled.click = true;
-                break;
-            case 'submit':
-                this.enabled.submit = true;
-                break;
-            case 'keypress':
-                this.enabled.keypress = true;
-                break;
-            case 'change':
-                this.enabled.change = true;
-                break;
-            }
+            this.enabled[type] = true;
         },
         create: function(init) {
         },
@@ -37,6 +24,10 @@ qx.Class.define("rctk.Base", {
         },
         value: function() {
             // return the current value for this control
+        },
+        destroy: function() {
+            qx.log.Logger.debug("control.destroy not implemented");
+            console.log(this);
         }
     }
 
