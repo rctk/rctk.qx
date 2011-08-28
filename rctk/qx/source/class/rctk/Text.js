@@ -30,12 +30,12 @@ qx.Class.define("rctk.Text",
         },
         set_properties: function(update) {
             this.base(arguments, update);
-            if('text' in update) {
+            if('value' in update) {
                 this.control.setValue(update.text);
             }
         },
         value: function() {
-            return this.control.getValue();
+            return {'value':this.control.getValue()};
         },
         /* events */
         submitted: function(e) {
