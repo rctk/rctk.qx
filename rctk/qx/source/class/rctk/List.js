@@ -64,13 +64,16 @@ qx.Class.define("rctk.List",
                     this.control.resetSelection();
                 }
                 else {
+                    console.log(data.selection);
+                    console.log(this.model);
                     var res = [];
                     for(var i = 0; i < this.model.length; i++) {
                         var m = this.model.getItem(i);
-                        if(m.get("id") in data.selection) {
+                        if(qx.lang.Array.contains(data.selection, m.get("id"))) {
                             res.push(m);
                         }
                     }
+                    console.log(res);
                     this.control.setModelSelection(res);
                 }
             }
