@@ -25,7 +25,7 @@ class QXFrontend(Base):
         if path.endswith("css"):
             type = "text/css"
         elif path.endswith("js"):
-            type = "text/js"
+            type = "text/javascript"
         elif path.endswith("png"):
             type = "image/png"
         elif path.endswith("gif"):
