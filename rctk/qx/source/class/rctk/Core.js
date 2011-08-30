@@ -18,7 +18,10 @@ qx.Class.define("rctk.Core",
             console.log(arguments);
             var req = new qx.io.remote.Request(path, "POST", "application/json");
             req.addListener("completed", function(e) {
-                callback(e.getResponseHeader('rctk-sid'), e.getContent());        
+                // safari seems to capitalize the headers, and qooxdoo
+                // doesn't do a case insentitive match.
+                var sid = e.getResponseHeader('rctk-sid') || e.getResponseHeader('Rctk-Sid');
+                callback(sid, e.getContent());        
             }, this);
             if(sessionid) {
                 req.setRequestHeader('rctk-sid', sessionid);
