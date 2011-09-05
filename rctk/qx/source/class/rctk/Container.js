@@ -35,7 +35,7 @@ qx.Class.define("rctk.Container", {
             var layout;
             if(type == "new") {
                 layout = new qx.ui.layout.Grid(0, 0);
-                this.container = this.control;
+                //this.container = this.control;
                 this.container.setLayout(layout);
             }
             else if(type == "tabbed") {
