@@ -90,6 +90,8 @@ qx.Class.define("rctk.Container", {
                 // control.control.setAlignX / Y
                 // left/center/right/null/top/middle/bottom/baseline
                 // allowGrowX/Y
+                // XXX code below is wrong - child will match entire parent,
+                // not just cell.
                 this.container.add(control.control, {row:cell.row, column:cell.column, rowSpan:cell.rowspan||1, colSpan:cell.colspan||1});
                 control.control.setAllowGrowX(true);
                 control.control.setAllowGrowY(true);

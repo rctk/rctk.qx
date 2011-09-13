@@ -72,6 +72,9 @@ qx.Class.define("rctk.Core",
             case "image":
                 control = new rctk.Image(this, id);
                 break;
+            case "rctk.qx.button":
+                control = new rctk.qx.Button(this, id);
+                break;
             default:
                 this.error("Unknown control: " + klass);
                 return;
