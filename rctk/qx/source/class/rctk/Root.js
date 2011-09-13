@@ -11,6 +11,8 @@ qx.Class.define("rctk.Root",
         // canvas does not support row/column, don't specify it
         this.root.add(this.container);
         this.control = this.container;
+        this.control.setAllowGrowX(true);
+        this.control.setAllowGrowY(true);
     },
     members: {
     }

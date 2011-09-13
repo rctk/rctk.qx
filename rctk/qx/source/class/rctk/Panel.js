@@ -7,6 +7,7 @@ qx.Class.define("rctk.Panel",
         this.base(arguments, core, id);
         this.tab = false;
         this.scrolling = false;
+        console.log("Panel created " + this.scrolling);
     },
     members: {
         create: function(data) {
